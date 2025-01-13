@@ -1,0 +1,10 @@
+---
+- name: Configure firewall
+  hosts: localhost
+  become: yes
+  tasks:
+  - name: permit traffic in default zone for ssh service
+    ansible.posix.firewalld:
+      service: ssh
+      permanent: true
+      state: enabled

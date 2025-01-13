@@ -1,0 +1,58 @@
+---
+- name: Install packages
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Add openssh
+      ansible.builtin.dnf:
+        name:
+          - openssh
+        state: latest
+
+    - name: Add tor
+      ansible.builtin.dnf:
+        name:
+          - tor
+        state: latest
+
+    - name: Add librewolf
+      ansible.builtin.dnf:
+        name:
+          - librewolf
+        state: latest
+
+    - name: Add metasploit-framework
+      ansible.builtin.dnf:
+        name:
+          - metasploit-framework
+        state: latest
+
+    - name: Add neovim
+      ansible.builtin.dnf:
+        name:
+          - neovim
+        state: latest
+
+    - name: Add alacritty
+      ansible.builtin.dnf:
+        name:
+          - alacritty
+        state: latest
+
+    - name: Add cosmic-desktop-environment
+      ansible.builtin.dnf:
+        name:
+          - '@cosmic-desktop-environment'
+        state: latest
+
+    - name: Remove cosmic-term
+      ansible.builtin.dnf:
+        name:
+          - cosmic-term
+        state: absent
+
+    - name: Remove cosmic-editor
+      ansible.builtin.dnf:
+        name:
+          - cosmic-editor
+        state: absent
