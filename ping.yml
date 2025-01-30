@@ -1,0 +1,13 @@
+---
+- name: Verify connectivity to all hosts
+  hosts: endpoint-devs
+  tasks:
+    - name: Ping all endpoint devices
+      ansible.builtin.ping:
+
+
+- name: Verify connectivity to network devices
+  hosts: network
+  tasks:
+    - name: Ping all hosts
+      ansible.netcommon.net_ping:

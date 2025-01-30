@@ -1,12 +1,24 @@
 ---
-- name: Install packages
-  hosts: localhost
+- name: Install packages on all systems
+  hosts: workstations
   become: yes
   tasks:
+    - name: Add libreoffice
+      ansible.builtin.dnf:
+        name:
+          - libreoffice
+        state: latest
+
     - name: Add openssh
       ansible.builtin.dnf:
         name:
           - openssh
+        state: latest
+
+    - name: Add scap-workbench
+      ansible.builtin.dnf:
+        name:
+          - scap-workbench
         state: latest
 
     - name: Add tor
@@ -33,17 +45,95 @@
           - neovim
         state: latest
 
+    - name: Add tmux
+      ansible.builtin.dnf:
+        name:
+          - tmux
+        state: latest
+
     - name: Add alacritty
       ansible.builtin.dnf:
         name:
           - alacritty
         state: latest
 
-    - name: Add cosmic-desktop-environment
+- name: Install packages on servers
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Add dhcp-server
       ansible.builtin.dnf:
         name:
-          - '@cosmic-desktop-environment'
+          - 'dhcp-server'
         state: latest
+
+    - name: Add httpd
+      ansible.builtin.dnf:
+        name:
+          - 'httpd'
+        state: latest
+
+    - name: Add cockpit
+      ansible.builtin.dnf:
+        name:
+          - 'cockpit'
+        state: latest
+
+    - name: Add cockpit-machines
+      ansible.builtin.dnf:
+        name:
+          - 'cockpit-machines'
+        state: latest
+
+    - name: Add qemu
+      ansible.builtin.dnf:
+        name:
+          - 'qemu'
+        state: latest
+
+- name: Install packages on gaming-rigs
+  hosts: gaming_rigs
+  become: yes
+  tasks:
+    - name: Add steam
+      ansible.builtin.dnf:
+        name:
+          - 'steam'
+        state: latest
+
+    - name: Add gamemode
+      ansible.builtin.dnf:
+        name:
+          - 'gamemode'
+        state: latest
+
+    - name: Add gamescope
+      ansible.builtin.dnf:
+        name:
+          - 'gamescope'
+        state: latest
+
+    - name: Add openrgb
+      ansible.builtin.dnf:
+        name:
+          - 'openrgb'
+        state: latest
+
+- name: Install desktop packages
+  hosts: workstations
+  become: yes
+  tasks:
+    - name: Add gnome-desktop
+      ansible.builtin.dnf:
+        name:
+          - '@gnome-desktop'
+        state: latest
+
+    - name: Add cosmic-desktop
+      ansible.builtin.dnf:
+        name:
+          - '@cosmic-desktop'
+        state: absent
 
     - name: Remove cosmic-term
       ansible.builtin.dnf:
@@ -56,3 +146,69 @@
         name:
           - cosmic-editor
         state: absent
+
+    - name: Install hyprland
+      ansible.builtin.dnf:
+        name:
+          - hyprland
+        state: latest
+
+    - name: Install hyprpaper
+      ansible.builtin.dnf:
+        name:
+          - hyprpaper
+        state: latest
+
+    - name: Install hypridle
+      ansible.builtin.dnf:
+        name:
+          - hyprpaper
+        state: latest
+
+    - name: Install hyprcursor
+      ansible.builtin.dnf:
+        name:
+          - hyprcursor
+        state: latest
+
+    - name: Install waybar
+      ansible.builtin.dnf:
+        name:
+          - waybar
+        state: latest
+
+    - name: Install SwayNotificationCenter
+      ansible.builtin.dnf:
+        name:
+          - SwayNotificationCenter
+        state: latest
+
+    - name: Install wl-clipboard
+      ansible.builtin.dnf:
+        name:
+        - wl-clipboard
+        state: latest
+
+    - name: Install wofi
+      ansible.builtin.dnf:
+        name:
+        - wofi
+        state: latest
+
+    - name: Install piper
+      ansible.builtin.dnf:
+        name:
+        - piper
+        state: latest
+
+    - name: Install remote-viewer
+      ansible.builtin.dnf:
+        name:
+        - remote-viewer
+        state: latest
+
+    - name: Install wlogout
+      ansible.builtin.dnf:
+        name:
+        - wlogout
+        state: latest

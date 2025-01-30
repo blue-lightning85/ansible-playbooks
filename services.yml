@@ -3,8 +3,20 @@
   hosts: localhost
   become: yes
   tasks:
-    - name:
+    - name: Enable sshd service
       ansible.builtin.service:
         name: sshd
+        state: started
+        enabled: yes
+
+    - name: Enable gdm service
+      ansible.builtin.service:
+        name: gdm
+        state: started
+        enabled: yes
+
+    - name: Enable cockpit service
+      ansible.builtin.service:
+        name: cockpit
         state: started
         enabled: yes

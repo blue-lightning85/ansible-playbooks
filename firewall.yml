@@ -1,10 +1,32 @@
 ---
-- name: Configure firewall
-  hosts: localhost
+- name: Configure firewall for all systems
+  hosts: all
   become: yes
   tasks:
-  - name: permit traffic in default zone for ssh service
+  - name: Permit traffic in default zone for ssh service
     ansible.posix.firewalld:
       service: ssh
+      permanent: true
+      state: enabled
+
+  - name: Permit traffic in default zone for cockpit service
+    ansible.posix.firewalld:
+      service: cockpit
+      permanent: true
+      state: enabled
+
+- name: Configure firewall for sever
+  hosts: servers
+  become: yes
+  tasks:
+  - name: Permit traffic in default zone for cockpit service
+    ansible.posix.firewalld:
+      service: dhcp
+      permanent: true
+      state: enabled
+
+  - name: Permit traffic in default zone for cockpit service
+    ansible.posix.firewalld:
+      service: http
       permanent: true
       state: enabled

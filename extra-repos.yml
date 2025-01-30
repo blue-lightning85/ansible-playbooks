@@ -1,6 +1,6 @@
 ---
 - name: Install repos
-  hosts: localhost
+  hosts: all
   become: yes
   tasks:
     # Tor repo
@@ -28,7 +28,7 @@
     # Metasploit Framework repo
     - name: Create Metasploit GPG Key
       ansible.builtin.shell: |
-        cat <<-EOF > /etc/pki/rpm-gpg/RPM-GPG-KEY-Metasploit
+        cat <<EOF > /etc/pki/rpm-gpg/RPM-GPG-KEY-Metasploit
         -----BEGIN PGP PUBLIC KEY BLOCK-----
 
         mQINBFDAy/0BEAC8I5bw5gLQqHKx5JCacYcXFL6AZowl3qIOTxo5yfBl8CepNpWY
@@ -92,3 +92,18 @@
         enabled: yes
         gpgcheck: yes
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Metasploit
+
+
+    # Rpm fusion free repo
+    - name: Add rpm fusion free repo
+      ansible.builtin.dnf:
+        name:
+          - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-41.noarch.rpm
+        state: present
+
+    # Rpm fusion non-free repo
+    - name: Add rpm fusion non-free repo
+      ansible.builtin.dnf:
+        name:
+          - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-41.noarch.rpm
+        state: present

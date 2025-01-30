@@ -1,0 +1,8 @@
+[endpoint-devs:children]
+servers
+
+[servers:children]
+domain-controllers
+
+[domain-controllers]
+reaper.ghost.local ansible_connection=local
